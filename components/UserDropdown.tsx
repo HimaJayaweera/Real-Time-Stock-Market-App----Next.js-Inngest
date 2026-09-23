@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
+import { LogOut } from "lucide-react";
+import NavItems from "./NavItems";
 
 const UserDropdown = () => {
     const router = useRouter();
@@ -44,21 +46,35 @@ const UserDropdown = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="text-gray-400">
-        <div className="flex relative items-center gap-3 py-2">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="https://avatars.githubusercontent.com/u/226455315?v=4&size=64" />
-            <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-              {user.name[0]}
-            </AvatarFallback>
-          </Avatar>
+        <DropdownMenuLabel>
+          <div className="flex relative items-center gap-3 py-2">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="https://avatars.githubusercontent.com/u/226455315?v=4&size=64" />
+              <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
+                {user.name[0]}
+              </AvatarFallback>
+            </Avatar>
 
-          <div className="flex flex-col">
-            <span className="text-base font-medium text-gray-400">
-              {user.name}
-            </span>
-            <span className="text-sm text-gray-500">{user.email}</span>
+            <div className="flex flex-col">
+              <span className="text-base font-medium text-gray-400">
+                {user.name}
+              </span>
+              <span className="text-sm text-gray-500">{user.email}</span>
+            </div>
           </div>
-        </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator className="bg-gray-600" />
+
+        <DropdownMenuItem
+          onClick={handleSignOut}
+          className="text-gray-100 test-md font-medium focus:bg-transparent focus:text-yellow-500 transition-colors cursor-pointer"
+        >
+          <LogOut className="h-4 w-4 mr-2 hidden sm:block" />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="hidden sm:block bg-gray-600" />
+        <nav className="sm:hidden">
+          <NavItems />
+        </nav>
       </DropdownMenuContent>
     </DropdownMenu>
   );
